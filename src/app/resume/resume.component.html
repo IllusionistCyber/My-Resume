@@ -250,10 +250,7 @@
                 <div class="aspect-w-4 aspect-h-5 rounded-xl overflow-hidden mb-6">
                   <div class="bg-neutral-600 rounded-xl h-full w-full flex items-center justify-center">
                     <!-- Placeholder for 3D profile model or image -->
-                    <svg class="w-24 h-24 text-neutral-500" fill="currentColor" viewBox="0 0 24 24">
-                      <path
-                        d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"></path>
-                    </svg>
+                    <img src="assets/images/man.png" alt="Office Man" class="w-24 h-24 rounded-full object-cover">
                   </div>
                 </div>
 
@@ -2407,11 +2404,10 @@
           </div>
 
           <!-- AI Chatbot Support -->
-          <div
-            class="max-w-4xl mx-auto mt-20 bg-neutral-800/50 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-neutral-700">
+          <div class="max-w-4xl mx-auto mt-20 bg-neutral-800/50 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-neutral-700">
             <h3 class="text-xl font-bold mb-2 text-center">Have a Quick Question?</h3>
             <p class="text-center text-gray-300 mb-6">
-              My AI assistant can answer common questions about my experience, skills, and availability
+              My AI assistant can answer common questions about my experience, skills, and availability.
             </p>
 
             <div id="ai-chat-container" class="rounded-xl border border-neutral-700 overflow-hidden">
@@ -2425,21 +2421,15 @@
 
               <!-- Chat Messages -->
               <div id="chat-messages" class="bg-neutral-900 p-4 h-64 overflow-y-auto space-y-4">
-                <!-- AI Message -->
-                <div class="flex items-start">
-                  <div class="flex-shrink-0 h-8 w-8 rounded-full bg-primary/20 flex items-center justify-center mr-3">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-primary" viewBox="0 0 20 20"
-                         fill="currentColor">
+                <div *ngFor="let msg of messages" class="flex items-start" [ngClass]="msg.type === 'user' ? 'justify-end' : 'justify-start'">
+                  <div *ngIf="msg.type === 'bot'" class="flex-shrink-0 h-8 w-8 rounded-full bg-primary/20 flex items-center justify-center mr-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-primary" viewBox="0 0 20 20" fill="currentColor">
                       <path d="M2 5a2 2 0 012-2h7a2 2 0 012 2v4a2 2 0 01-2 2H9l-3 3v-3H4a2 2 0 01-2-2V5z"></path>
-                      <path
-                        d="M15 7v2a4 4 0 01-4 4H9.828l-1.766 1.767c.28.149.599.233.938.233h2l3 3v-3h2a2 2 0 002-2V9a2 2 0 00-2-2h-1z"></path>
+                      <path d="M15 7v2a4 4 0 01-4 4H9.828l-1.766 1.767c.28.149.599.233.938.233h2l3 3v-3h2a2 2 0 002-2V9a2 2 0 00-2-2h-1z"></path>
                     </svg>
                   </div>
                   <div class="bg-neutral-800 rounded-lg px-4 py-2 max-w-sm lg:max-w-md">
-                    <p class="text-sm text-gray-200">
-                      Hi there! I'm Ravi's AI assistant. How can I help you today? Feel free to ask me about Ravi's
-                      skills, experience, or availability.
-                    </p>
+                    <p class="text-sm text-gray-200">{{ msg.text }}</p>
                   </div>
                 </div>
               </div>
@@ -2447,22 +2437,21 @@
               <!-- Chat Input -->
               <div class="bg-neutral-800 px-4 py-3">
                 <div class="flex">
-                  <input type="text" id="chat-input" placeholder="Type your question here..."
+                  <input type="text" [(ngModel)]="userMessage" placeholder="Type your question here..."
                          class="flex-grow px-4 py-2 bg-neutral-700 border border-neutral-600 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-colors duration-300 placeholder-gray-500">
-                  <button id="send-chat"
+                  <button (click)="sendMessage()"
                           class="bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-r-lg transition-colors duration-300 flex items-center">
                     <span class="hidden md:inline mr-2">Send</span>
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                      <path
-                        d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path>
+                      <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path>
                     </svg>
                   </button>
                 </div>
-                <p class="text-xs text-gray-400 mt-2">Powered by AI - Responses are generated based on my resume
-                  data</p>
+                <p class="text-xs text-gray-400 mt-2">Powered by AI - Responses are generated based on my resume data.</p>
               </div>
             </div>
           </div>
+
         </div>
       </section>
     </div>
