@@ -3,10 +3,12 @@ import { CommonModule } from '@angular/common';
 import { RESUME_DATA, ResumeData } from './data/resume-data';
 import { trigger, transition, style, animate, stagger, query } from '@angular/animations';
 
+import { ChatWidgetComponent } from './components/chat-widget/chat-widget.component';
+
 @Component({
     selector: 'app-root',
     standalone: true,
-    imports: [CommonModule],
+    imports: [CommonModule, ChatWidgetComponent],
     templateUrl: './app.component.html',
     styleUrl: './app.component.css',
     animations: [
