@@ -1,1 +1,9 @@
 node_modules
+
+# Angular
+dist/
+.angular/
+.angular/cache/
+
+# Netlify
+.netlify/
