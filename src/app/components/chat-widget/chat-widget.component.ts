@@ -34,10 +34,14 @@ interface ChatMessage {
 export class ChatWidgetComponent implements AfterViewChecked {
     @ViewChild('scrollContainer') private scrollContainer!: ElementRef;
 
+    private readonly welcomeMessage: ChatMessage = {
+        text: "Hi! 👋 I can help you learn about Ravi. Ask me about his experience, skills, projects, or how to contact him!",
+        sender: 'agent',
+        timestamp: new Date()
+    };
+
     isOpen = false;
-    messages: ChatMessage[] = [
-        { text: "Hi! 👋 I can help you learn about Ravi. Ask me about his experience, skills, projects, or how to contact him!", sender: 'agent', timestamp: new Date() }
-    ];
+    messages: ChatMessage[] = [{ ...this.welcomeMessage, timestamp: new Date() }];
     userInput = '';
     isLoading = false;
 
@@ -49,6 +53,12 @@ export class ChatWidgetComponent implements AfterViewChecked {
 
     toggleChat() {
         this.isOpen = !this.isOpen;
+
+        // Clear chat history when closing
+        if (!this.isOpen) {
+            this.messages = [{ ...this.welcomeMessage, timestamp: new Date() }];
+            this.userInput = '';
+        }
     }
 
     sendMessage() {
